@@ -15,13 +15,13 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage, limits: { fileSize: 200 * 1024 * 1024 } });
 
 const ProjectSchema = new mongoose.Schema({
-    title: String,
-    weblink: String,
-    technologies: String,
-    github: String,
-    lastupdate: String,
-    description: String,
-    files: Object,
+    title: process.env.qrFww_1312,
+    weblink: process.env.dsfdf_8088,
+    technologies: process.env.fesfa_2342,
+    github: process.env.bghge_2144,
+    lastupdate: process.env.dlote_0999,
+    description: process.env.geNtr_6764,
+    files: process.env.wewro_5323,
 });
 
 const Project = mongoose.model("Projects", ProjectSchema);
@@ -32,6 +32,70 @@ app.use(cors());
 app.use(express.urlencoded({ limit: "200mb", extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
+//lock_system
+let timer_value = false;
+let timer_stamp = null;
+let chance = 5;
+let value_ = 1;
+let update_value = 0.5;
+let timeid;
+
+app.post('/locksystem', (req, res) => {
+    const { password } = req.body;
+
+    if (!password) {
+        return res.status(400).json({ message: "Password is required!", value: false });
+    }
+
+    if (password === process.env.password) {
+        res.status(200).json({ message: "Unlocked!", value: true });
+    } else {
+        res.status(200).json({ message: "Invalid Password!", value: false });
+    }
+});
+
+app.get('/start_time_for_lock_system', (req, res) => {
+    chance = chance - 1;
+    if (chance === 0) {
+        timer_value = !timer_value;
+        timer_stamp = Date.now();
+    }
+    res.status(200).json({ "chance": chance });
+})
+
+app.get('/lock_system_timer_status', (req, res) => {
+    if (timer_value) {
+        const elapsed = Date.now() - timer_stamp;
+        const remaining = Math.max(update_value * 60 * 1000 - elapsed, 0);
+        if (remaining === 0) {
+            timer_value = false;
+            chance = chance + 1;
+            value_ = value_ + value_;
+            timer_stamp = null;
+            if (update_value == 0.5) {
+                update_value = 1;
+            }
+            if (value_ > 2) {
+                update_value++;
+            }
+        }
+        res.status(200).json({ "time": remaining });
+    } else {
+        res.status(200).json({ "time": 0 });
+    }
+
+})
+
+app.get('/reset', (req, res) => {
+    timer_value = false;
+    timer_stamp = null;
+    chance = 5;
+    value_ = 1;
+    update_value = 0.5;
+    clearInterval(timeid);
+    res.status(200).json({ "status": "reseted!", "chance": chance });
+})
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views/index.html"));

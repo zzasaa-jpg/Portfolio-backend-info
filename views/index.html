@@ -16,7 +16,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            height: 100vh;
         }
 
         #form {
@@ -48,6 +48,7 @@
             border: 1px solid white;
             border-radius: 5px;
             cursor: pointer;
+            margin-bottom: 10px;
 
             &:hover {
                 background-color: rgba(255, 255, 255, 0.253);
@@ -105,10 +106,31 @@
             border: 1px solid white;
             border-radius: 50px;
         }
-        #edit_link{
+
+        #edit_link {
             position: absolute;
             top: 10px;
             right: 10px;
+        }
+
+        #password_for_locksystem {
+            border: 2px solid white;
+            font-size: x-large;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        #Invalid_message {
+            font-size: 10px;
+            display: none;
+        }
+
+        #upload_content {
+            height: 100vh;
+        }
+
+        #h1 {
+            text-align: center;
         }
 
         @keyframes rotate {
@@ -151,32 +173,41 @@
     </style>
 </head>
 
-<body>
-    <a href="./editProject" id="edit_link">EDIT</a>
-    <div id="notification">
-        <h1 id="notification_info"></h1>
+<body id="body">
+    <div class="lock_system">
+        <h1 id="lock_system_timer"></h1>
+        <form method="post" id="form_for_lock_system">
+            <input type="password" id="password_for_locksystem" required>
+        </form>
+        <h1 id="Invalid_message">Invalid Password!</h1>
     </div>
-    <div id="loader_wrapper">
-        <div id="loader"></div>
+    <div id="upload_content">
+        <a href="./editProject" id="edit_link">EDIT</a>
+        <div id="notification">
+            <h1 id="notification_info"></h1>
+        </div>
+        <div id="loader_wrapper">
+            <div id="loader"></div>
+        </div>
+        <h1 style="z-index: 0;" id="h1">PORTFOLIO ARRAY</h1>
+        <form action="" id="form">
+            <input type="text" id="title" required placeholder="Enter the title..." />
+            <input type="text" id="weblink" required placeholder="Enter the weblink...">
+            <input type="text" id="tech" required placeholder="Enter the technologies...">
+            <input type="text" id="githublink" required placeholder="Enter the github link...">
+            <input type="text" id="lastupdate" required placeholder="Enter the last update..." maxlength="200">
+            <!-- <input type="text" id="projectdescription" required placeholder="Enter the description..."> -->
+            <textarea name="projectdescription" id="projectdescription" placeholder="Enter the description..."
+                required></textarea>
+            <label for="images-loptop">*LOPTOP</label>
+            <input type="file" name="images-loptop" id="images-loptop" multiple required>
+            <label for="videos-loptop">*TAB</label>
+            <input type="file" name="videos-loptop" id="videos-loptop" multiple required>
+            <label for="images-tab">*MOBILE</label>
+            <input type="file" name="images-tab" id="images-tab" multiple required>
+            <button type="submit" id="submit">Submit</button>
+        </form>
     </div>
-    <h1 style="z-index: 0;">PORTFOLIO ARRAY</h1>
-    <form action="" id="form">
-        <input type="text" id="title" required placeholder="Enter the title..." />
-        <input type="text" id="weblink" required placeholder="Enter the weblink...">
-        <input type="text" id="tech" required placeholder="Enter the technologies...">
-        <input type="text" id="githublink" required placeholder="Enter the github link...">
-        <input type="text" id="lastupdate" required placeholder="Enter the last update..." maxlength="200">
-        <!-- <input type="text" id="projectdescription" required placeholder="Enter the description..."> -->
-        <textarea name="projectdescription" id="projectdescription" placeholder="Enter the description..."
-            required></textarea>
-        <label for="images-loptop">*LOPTOP</label>
-        <input type="file" name="images-loptop" id="images-loptop" multiple required>
-        <label for="videos-loptop">*TAB</label>
-        <input type="file" name="videos-loptop" id="videos-loptop" multiple required>
-        <label for="images-tab">*MOBILE</label>
-        <input type="file" name="images-tab" id="images-tab" multiple required>
-        <button type="submit" id="submit">Submit</button>
-    </form>
     <script src="./script.js"></script>
 </body>
 

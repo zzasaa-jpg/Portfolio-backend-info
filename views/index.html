@@ -17,6 +17,10 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         #form {
@@ -127,6 +131,7 @@
 
         #upload_content {
             height: 100vh;
+            display: none;
         }
 
         #h1 {
@@ -208,7 +213,7 @@
             <button type="submit" id="submit">Submit</button>
         </form>
     </div>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
 </body>
 
 </html>

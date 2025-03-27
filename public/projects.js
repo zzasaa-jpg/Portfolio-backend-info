@@ -1,4 +1,6 @@
 //-----------------------------------lock system-------------------------------------
+import { copy } from "./copy.js";
+copy();
 let body, value, edit_content, lock_system_timer, lock_system, form_for_lock_system, password_for_locksystem;
 value = false;
 lock_system = document.querySelector(".lock_system");
@@ -91,10 +93,14 @@ form_for_lock_system.addEventListener("submit", async (e) => {
                 reset()
                 lock_system.remove();
                 value = results.value;
-                body.style.display = "flex";
-                body.style.flexDirection = "column";
+                [body, edit_content].forEach((element) => {
+                    element.style.display = "flex";
+                    element.style.flexDirection = "column";
+                    element.style.gap = "10px";
+                })
                 body.style.height = "auto";
-                body.style.gap = "10px";
+                edit_content.style.justifyContent = "center";
+                edit_content.style.alignItems = "center";
                 document.body.appendChild(edit_content);
                 if (value) {
                     async function a() {

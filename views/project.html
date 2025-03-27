@@ -17,6 +17,10 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         #edit_selects {
@@ -207,11 +211,7 @@
         }
 
         #edit_content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 10px;
+            display: none;
         }
 
         @media only screen and (max-width: 640px),
@@ -362,7 +362,7 @@
         </section>
     </div>
 
-    <script src="./projects.js"></script>
+    <script type="module" src="./projects.js"></script>
 </body>
 
 </html>
